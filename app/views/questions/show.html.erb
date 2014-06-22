@@ -1,2 +1,19 @@
 <h1><%= @question.title %></h1>
 <p><%= @question.description %></p>
+<br>
+<%= link_to "Edit", edit_question_path %> <%= link_to "Delete", @question, method: :delete%>
+<br>
+<ul>
+  <% @answers.each do |answer| %>
+    <li><%= button_to '+1', answer_path(answer), method: :put, action: "update" %> <%= answer.best_answer_count %> <%= answer.created_at %> <%= answer.description %></li>
+  <% end %>
+</ul>
+<br>
+
+<%= form_for [@question, @answer] do |f| %>
+  <%= f.label :answer %>:
+  <%= f.text_area :description, required: true %>
+  <br>
+  <br>
+  <%= f.submit %>
+<% end %>

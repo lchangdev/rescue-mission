@@ -7,6 +7,13 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<% if current_user %>
+    signed in as <img src="<%=current_user.image%>" class="avatar"><strong><%= current_user.name %></strong>!
+    <%= link_to "sign out", signout_path, id: "sign_out" %>
+  <% else %>
+    <%= link_to "sign in with Twitter", "/auth/twitter", id: "sign_in" %>
+  <% end %>
+
   <% if flash.any? %>
     <h1><%= flash[:notice] %></h1>
   <% end %>
